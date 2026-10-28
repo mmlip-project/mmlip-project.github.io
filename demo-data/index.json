@@ -1,0 +1,170 @@
+[
+  {
+    "id": "test_poor_lighting_sequence_0_0052-0100",
+    "data": "test_poor_lighting_sequence_0_0052-0100.json",
+    "dataset": "mmBody",
+    "time": [
+      "00:52",
+      "01:00"
+    ],
+    "action": "T-Pose",
+    "split": "train",
+    "n_frames": 86
+  },
+  {
+    "id": "train_sequence_15_0041-0047",
+    "data": "train_sequence_15_0041-0047.json",
+    "dataset": "mmBody",
+    "time": [
+      "00:41",
+      "00:47"
+    ],
+    "action": "One Arm Forward",
+    "split": "train",
+    "n_frames": 61
+  },
+  {
+    "id": "train_sequence_5_0231-0241",
+    "data": "train_sequence_5_0231-0241.json",
+    "dataset": "mmBody",
+    "time": [
+      "02:31",
+      "02:41"
+    ],
+    "action": "Front Lunge",
+    "split": "train",
+    "n_frames": 101
+  },
+  {
+    "id": "train_sequence_6_0258-0304",
+    "data": "train_sequence_6_0258-0304.json",
+    "dataset": "mmBody",
+    "time": [
+      "02:58",
+      "03:04"
+    ],
+    "action": "Mark Time",
+    "split": "train",
+    "n_frames": 61
+  },
+  {
+    "id": "train_sequence_10_0111-0120",
+    "data": "train_sequence_10_0111-0120.json",
+    "dataset": "mmBody",
+    "time": [
+      "01:11",
+      "01:20"
+    ],
+    "action": "Squat",
+    "split": "train",
+    "n_frames": 96
+  },
+  {
+    "id": "train_sequence_4_0132-0142",
+    "data": "train_sequence_4_0132-0142.json",
+    "dataset": "mmBody",
+    "time": [
+      "01:32",
+      "01:42"
+    ],
+    "action": "Bowing",
+    "split": "train",
+    "n_frames": 101
+  },
+  {
+    "id": "train_sequence_0_0120-0128",
+    "data": "train_sequence_0_0120-0128.json",
+    "dataset": "mmBody",
+    "time": [
+      "01:20",
+      "01:28"
+    ],
+    "action": "Single Leg Jump",
+    "split": "train",
+    "n_frames": 81
+  },
+  {
+    "id": "train_sequence_13_0055-0102",
+    "data": "train_sequence_13_0055-0102.json",
+    "dataset": "mmBody",
+    "time": [
+      "00:55",
+      "01:02"
+    ],
+    "action": "Front Kick",
+    "split": "test",
+    "n_frames": 71
+  },
+  {
+    "id": "train_sequence_3_0209-0221",
+    "data": "train_sequence_3_0209-0221.json",
+    "dataset": "mmBody",
+    "time": [
+      "02:09",
+      "02:21"
+    ],
+    "action": "Hands to Head",
+    "split": "train",
+    "n_frames": 116
+  },
+  {
+    "id": "train_sequence_0_0159-0208",
+    "data": "train_sequence_0_0159-0208.json",
+    "dataset": "mmBody",
+    "time": [
+      "01:59",
+      "02:08"
+    ],
+    "action": "Side Kick",
+    "split": "train",
+    "n_frames": 91
+  },
+  {
+    "id": "train_sequence_10_0111-0121",
+    "data": "train_sequence_10_0111-0121.json",
+    "dataset": "mmBody",
+    "time": [
+      "01:11",
+      "01:21"
+    ],
+    "action": "Squat",
+    "split": "train",
+    "n_frames": 100
+  },
+  {
+    "id": "mmFI_S01_27",
+    "data": "mmFI_S01_27.json",
+    "dataset": "mmFI",
+    "time": [
+      "00:00",
+      "00:29"
+    ],
+    "action": "Bowing",
+    "split": "train",
+    "n_frames": 297
+  },
+  {
+    "id": "mmFI_S05_20",
+    "data": "mmFI_S05_20.json",
+    "dataset": "mmFI",
+    "time": [
+      "00:00",
+      "00:29"
+    ],
+    "action": "Throwing",
+    "split": "train",
+    "n_frames": 297
+  },
+  {
+    "id": "mmFI_S08_15",
+    "data": "mmFI_S08_15.json",
+    "dataset": "mmFI",
+    "time": [
+      "00:00",
+      "00:29"
+    ],
+    "action": "Side lunge",
+    "split": "train",
+    "n_frames": 297
+  }
+]
