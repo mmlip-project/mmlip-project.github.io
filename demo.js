@@ -59,7 +59,7 @@ async function loadSample(item,button){
  document.querySelectorAll('[role=tab]').forEach(t=>{const selected=t===button;t.setAttribute('aria-selected',selected);t.tabIndex=selected?0:-1;});
  $('demo-panel').hidden=true;$('demo-panel').setAttribute('aria-labelledby',button.id);$('status').textContent='Loading radar sequence…';$('action-title').textContent=item.action;$('sample-meta').textContent=`${item.dataset} · ${item.time.join('–')}`;
  try{
- let d=cache.get(item.id);if(!d){const r=await fetch(`demo-data/${encodeURIComponent(item.data)}`);if(!r.ok)throw new Error(`HTTP ${r.status}`);d=await r.json();d.model_outputs.sort((a,b)=>a.show_from_frame-b.show_from_frame);cache.set(item.id,d);}
+ let d=cache.get(item.id);if(!d){const r=await fetch(`demo-data/${item.data.split('/').map(encodeURIComponent).join('/')}`);if(!r.ok)throw new Error(`HTTP ${r.status}`);d=await r.json();d.model_outputs.sort((a,b)=>a.show_from_frame-b.show_from_frame);cache.set(item.id,d);}
  if(token!==state.token)return;
  state.data=d;state.index=0;state.az=d.render.view.azim;state.el=d.render.view.elev;$('timeline').max=d.frames.length-1;
  $('sample-meta').textContent=`${d.source.dataset} · ${d.source.sequence} · ${d.source.time.join('–')}`;
@@ -77,9 +77,10 @@ for(const name of ['pointerup','pointercancel','lostpointercapture'])canvas.addE
 new ResizeObserver(draw).observe(canvas);
 document.addEventListener('visibilitychange',()=>state.last=0);
 function animate(time){if(state.data&&state.playing&&!document.hidden){if(!state.last)state.last=time;const interval=1000/state.data.source.fps/state.speed;const steps=Math.floor((time-state.last)/interval);if(steps){state.index=(state.index+steps)%state.data.frames.length;state.last+=steps*interval;update();}}requestAnimationFrame(animate);}
-async function init(){try{const response=await fetch('demo-data/index.json');if(!response.ok)throw new Error(`HTTP ${response.status}`);const samples=await response.json();
- // Start with the sample shown in the supplied reference; retain all other sequences.
- samples.sort((a,b)=>(b.id==='mmFI_S01_27')-(a.id==='mmFI_S01_27'));
+async function init(){try{const response=await fetch('demo-data/index.json?v=20261029');if(!response.ok)throw new Error(`HTTP ${response.status}`);const samples=await response.json();
+ // Group datasets in the requested order; preserve numbered clip order within each group.
+ const datasetOrder={mmbody:0,mmfi:1,mri:2};
+ samples.sort((a,b)=>(datasetOrder[a.dataset.toLowerCase()]??99)-(datasetOrder[b.dataset.toLowerCase()]??99)||a.data.localeCompare(b.data,undefined,{numeric:true}));
  const counts=new Map();
  samples.forEach((item,i)=>{const key=item.action+' '+item.dataset,n=(counts.get(key)||0)+1;counts.set(key,n);const b=document.createElement('button');b.type='button';b.className='tab';b.id=`sample-tab-${i}`;b.setAttribute('role','tab');b.setAttribute('aria-controls','demo-panel');b.setAttribute('aria-selected','false');b.tabIndex=-1;b.innerHTML=`${escapeHTML(item.action)}<small>${escapeHTML(item.dataset)}${n>1?` · ${n}`:''}</small>`;b.title=`${item.id} · ${item.time.join('–')}`;b.addEventListener('click',()=>loadSample(item,b));$('tabs').append(b);});
  $('tabs').addEventListener('keydown',e=>{const buttons=[...$('tabs').children],i=buttons.indexOf(document.activeElement);if(i<0)return;let next;if(e.key==='ArrowRight')next=(i+1)%buttons.length;else if(e.key==='ArrowLeft')next=(i-1+buttons.length)%buttons.length;else if(e.key==='Home')next=0;else if(e.key==='End')next=buttons.length-1;else return;e.preventDefault();buttons[next].focus();buttons[next].click();});
