@@ -57,12 +57,11 @@ function draw(){
 async function loadSample(item,button){
  const token=++state.token;state.data=null;state.output=null;state.last=0;
  document.querySelectorAll('[role=tab]').forEach(t=>{const selected=t===button;t.setAttribute('aria-selected',selected);t.tabIndex=selected?0:-1;});
- $('demo-panel').hidden=true;$('demo-panel').setAttribute('aria-labelledby',button.id);$('status').textContent='Loading radar sequence…';$('action-title').textContent=item.action;$('sample-meta').textContent=`${item.dataset} · ${item.time.join('–')}`;
+ $('demo-panel').hidden=true;$('demo-panel').setAttribute('aria-labelledby',button.id);$('status').textContent='Loading radar sequence…';$('action-title').textContent=item.action;
  try{
  let d=cache.get(item.id);if(!d){const r=await fetch(`demo-data/${item.data.split('/').map(encodeURIComponent).join('/')}`);if(!r.ok)throw new Error(`HTTP ${r.status}`);d=await r.json();d.model_outputs.sort((a,b)=>a.show_from_frame-b.show_from_frame);cache.set(item.id,d);}
  if(token!==state.token)return;
  state.data=d;state.index=0;state.az=d.render.view.azim;state.el=d.render.view.elev;$('timeline').max=d.frames.length-1;
- $('sample-meta').textContent=`${d.source.dataset} · ${d.source.sequence} · ${d.source.time.join('–')}`;
  $('status').textContent='';$('demo-panel').hidden=false;syncPlay();update();
  }catch(err){if(token!==state.token)return;$('status').textContent='Could not load this sequence. Select the tab again to retry.';console.error(err);}
 }
